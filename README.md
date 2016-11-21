@@ -9,7 +9,7 @@ It employs flashcards that contain piano keynote symbols, associated with Bass a
 
 The documents in this repository are listed as follows:
 
-\Project_Document.pdf      Contains the documentation of the project
+\Piano_Teaching_Protoype.pdf      Contains the documentation of the project
 
 \Audio_Serial_Tx.m	   Contains the Matlab code for audio data transmission to the device
 
