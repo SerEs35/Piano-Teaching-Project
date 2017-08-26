@@ -1,3 +1,5 @@
+;Sergio Espinal 2015
+;---------------------
 
 #include "p16F1719.inc"
 
@@ -17,27 +19,27 @@
  ;Result_conversion   equ	
 ;............................................ 
 group1	     idata	0x020	;udata
-ADC_pin		    res	    1	; checks the turn of ADC0 or ADC1 
+ADC_pin		    res	    1	;flag used to select ADC0 or ADC1. This determines which player's keyboard is sensing
 device		    res	    1
 clef		    res	    1	;0x01: bass, 0x02: treble
-math_logic	    res	    1		    
-Result_conversion   res	    2
-key_button	    res	    2
+math_logic	    res	    1	;temp variable used to store bits of information like Z or C when performing comparison of two numbers 	    
+Result_conversion   res	    2	;temp variable
+key_button	    res	    2	;stores the value of the ADC output when a key is pressed
    
 rg_flag		    res	    1	;0x00: host,  0x01: client 
 
-tcounter	    res	    2
+tcounter	    res	    2	;temp variable used on delay functions
 time_flag	    res	    1	; should be a bit	 
 
 temp_compare	    res	    2	;for ADC result conversion comparison
 	    
 key_status_flag	    res	    1	;0x01: photo_treble  0x02:   0x03:   0x04: RG buttons
 
-byte_data	    res	    1
-audio_data	    res	    3	    
+byte_data	    res	    1	;temp variable for fetching memory data
+audio_data	    res	    3	;temp variable for audio output
 
-init_addr	    res	    3
-end_addr	    res	    4	    
+init_addr	    res	    3	;audio file starting address
+end_addr	    res	    4	;audio file ending address    
 
 iter_i		    res	    1
 iter_j		    res	    2		  
@@ -1404,6 +1406,7 @@ function_compare_2
     return
 ;;-------------------------------------------------------------------------------    
 SPI_Tx_Rx		    ;2
+;function used to start SPI communication and receive a byte
 
     banksel SSP1BUF	    ;2
     movf    SSP1BUF ,W	    ;1
